@@ -13,7 +13,7 @@ class MultiShip_Recipient extends MultiShip_Object
 	  {
 		  case "phone":
 		  {
-			  $value = preg_replace("/[^1-9]/", '', $value);
+			  $value = preg_replace("/[^0-9]/", '', $value);
 		  }
 	  }
 	  return parent::fixField($name, $value);
