@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 /* Объект - Параметры заказа
   @PARAMS:
@@ -31,7 +31,7 @@ class MultiShip_Order extends MultiShip_Object
   // Добавляем вложение в заказ
   function appendItem(MultiShip_OrderItem $item)
   {
-    if (! is_array($this->items))
+    if (!is_array($this->items))
     {
       $this->items = array();
     }

@@ -22,13 +22,13 @@ class MultiShip_OpenApi extends MultiShip_Object
   */
   function __construct($settings)
   {
-	  foreach($settings as $key=>$value)
-	  {
-		  if(isset($this->{$key}))
-		  {
-			  $this->{$key} = $value;
-		  }
-	  }
+    foreach ($settings as $key => $value)
+    {
+      if (isset($this->{$key}))
+      {
+        $this->{$key} = $value;
+      }
+    }
   }
 
   /*
@@ -68,28 +68,31 @@ class MultiShip_OpenApi extends MultiShip_Object
     $this->_data = array();
 
     // проверяем входные данные
-    if (! $request instanceof MultiShip_RequestDeliveryList)
+    if (!$request instanceof MultiShip_RequestDeliveryList)
     {
       $this->_error = MULTISHIP_ERROR_WRONG_PARAM;
+
       return false;
     }
-    if ($deliverypoint != null && ! $deliverypoint instanceof MultiShip_DeliveryPoint)
+    if ($deliverypoint != null && !$deliverypoint instanceof MultiShip_DeliveryPoint)
     {
       $this->_error = MULTISHIP_ERROR_WRONG_PARAM;
+
       return false;
     }
-    if (! $request->validate())
+    if (!$request->validate())
     {
       $this->_error = $request->_last_error;
+
       return false;
     }
 
     // Инициализируем необходимые поля запроса
     $request->appendToArray($this->_data, true);
-    if($deliverypoint != null)
+    if ($deliverypoint != null)
     {
-		$deliverypoint->appendToArray($this->_data, true);
-	}
+      $deliverypoint->appendToArray($this->_data, true);
+    }
 
     // Отправляем запрос и возвращаем результат запроса
     return $this->request('searchDeliveryList');
@@ -131,6 +134,7 @@ class MultiShip_OpenApi extends MultiShip_Object
     else
     {
       $this->_error = MULTISHIP_ERROR_WRONG_PARAM;
+
       return false;
     }
 
@@ -148,15 +152,17 @@ class MultiShip_OpenApi extends MultiShip_Object
     $this->_data = array();
 
     // Проверяем входные данные и нициализируем необходимые поля запроса
-    if (preg_match("@^((\d+)|((\d+\-)?MS\d+))$@",$order_id))
+    if (preg_match("@^((\d+)|((\d+\-)?MS\d+))$@", $order_id))
     {
       $this->_data['order_id'] = $order_id;
     }
     else
     {
       $this->_error = MULTISHIP_ERROR_WRONG_PARAM;
+
       return false;
     }
+
     // Отправляем запрос и возвращаем результат запроса
     return $this->request('getSenderOrderStatus');
   }
@@ -178,50 +184,57 @@ class MultiShip_OpenApi extends MultiShip_Object
     else
     {
       $this->_error = MULTISHIP_ERROR_WRONG_PARAM;
+
       return false;
     }
+
     /// Отправляем запрос и возвращаем результат запроса
     return $this->request('getSenderOrderStatuses');
   }
 
   /**
   Создание заказа
-    @PARAMS:
-      (MultiShip_Order) order - данные заказа
-      (MultiShip_Recipient) recipient - данные получателя
-      (MultiShip_Delivery) delivery - данные варианта доставки
-      (MultiShip_DeliveryPoint) delivery_point - данные точки доставки (адрес получателя или ПВЗ ID)
+  @PARAMS:
+  (MultiShip_Order) order - данные заказа
+  (MultiShip_Recipient) recipient - данные получателя
+  (MultiShip_Delivery) delivery - данные варианта доставки
+  (MultiShip_DeliveryPoint) delivery_point - данные точки доставки (адрес получателя или ПВЗ ID)
 
-     @RETURN bool|mixed|object
+  @RETURN bool|mixed|object
    */
   function createOrder($order, $recipient, $delivery, $delivery_point)
   {
     $this->_data = array();
 
     // проверяем входные данные
-    if (! $order instanceof MultiShip_Order or ! $recipient instanceof MultiShip_Recipient or ! $delivery instanceof MultiShip_Delivery or ! $delivery_point instanceof MultiShip_DeliveryPoint)
+    if (!$order instanceof MultiShip_Order or !$recipient instanceof MultiShip_Recipient or !$delivery instanceof MultiShip_Delivery or !$delivery_point instanceof MultiShip_DeliveryPoint)
     {
       $this->_error = MULTISHIP_ERROR_WRONG_PARAM;
+
       return false;
     }
-    if (! $order->validate())
+    if (!$order->validate())
     {
       $this->_error = $order->_last_error;
+
       return false;
     }
-    if (! $recipient->validate())
+    if (!$recipient->validate())
     {
       $this->_error = $recipient->_last_error;
+
       return false;
     }
-    if (! $delivery->validate())
+    if (!$delivery->validate())
     {
       $this->_error = $delivery->_last_error;
+
       return false;
     }
-    if (! $delivery->pickuppoint && ! $delivery_point->validate())
+    if (!$delivery->pickuppoint && !$delivery_point->validate())
     {
       $this->_error = $delivery_point->_last_error;
+
       return false;
     }
 
@@ -261,6 +274,7 @@ class MultiShip_OpenApi extends MultiShip_Object
     {
       return false;
     }
+
     return false;
   }
 
@@ -290,9 +304,9 @@ class MultiShip_OpenApi extends MultiShip_Object
     {
       return false;
     }
+
     return false;
   }
-
 
 
   function _echoLabel($file, $filename)
@@ -301,7 +315,7 @@ class MultiShip_OpenApi extends MultiShip_Object
     header('Expires: 0');
     header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
     header('Content-Type: application/pdf');
-    header('Content-Length: '.(function_exists('mb_strlen') ? mb_strlen($file, '8bit') : strlen($file)));
+    header('Content-Length: ' . (function_exists('mb_strlen') ? mb_strlen($file, '8bit') : strlen($file)));
     header("Content-Disposition: attachment; filename=\"$filename.pdf\"");
     header('Content-Transfer-Encoding: binary');
     echo $file;
@@ -329,7 +343,7 @@ class MultiShip_OpenApi extends MultiShip_Object
     // Собираем все параметры запроса до 3 уровня вложенности и генерируем подпись
     foreach ($keys as $key)
     {
-      if (! is_array($this->_data[$key]))
+      if (!is_array($this->_data[$key]))
       {
         $hash .= $this->_data[$key];
       }
@@ -339,7 +353,7 @@ class MultiShip_OpenApi extends MultiShip_Object
         sort($subkeys);
         foreach ($subkeys as $subkey)
         {
-          if (! is_array($this->_data[$key][$subkey]))
+          if (!is_array($this->_data[$key][$subkey]))
           {
             $hash .= $this->_data[$key][$subkey];
           }
@@ -349,7 +363,7 @@ class MultiShip_OpenApi extends MultiShip_Object
             sort($subsubkeys);
             foreach ($subsubkeys as $subsubkey)
             {
-              if (! is_array($this->_data[$key][$subkey][$subsubkey]))
+              if (!is_array($this->_data[$key][$subkey][$subsubkey]))
               {
                 $hash .= $this->_data[$key][$subkey][$subsubkey];
               }
@@ -364,9 +378,9 @@ class MultiShip_OpenApi extends MultiShip_Object
     {
       ob_start();
       echo "-------START OpenAPI::Sign(...);-------\r\n";
-      echo "Request Client Key: \r\n".$this->keys[$method]."\r\n";
-      echo "Request String Dump: \r\n".$hash."\r\n";
-      echo "Request Secure Key = MD5(Request String Dump): \r\n".md5($hash)."\r\n";
+      echo "Request Client Key: \r\n" . $this->keys[$method] . "\r\n";
+      echo "Request String Dump: \r\n" . $hash . "\r\n";
+      echo "Request Secure Key = MD5(Request String Dump): \r\n" . md5($hash) . "\r\n";
       echo "-------END OpenAPI::Sign(...);-------\r\n";
       $this->_debug .= ob_get_clean();
     }
@@ -374,7 +388,7 @@ class MultiShip_OpenApi extends MultiShip_Object
     $hash = md5($hash);
 
     // Подписываем запрос
-    $this->_data['secret_key']  = $hash;
+    $this->_data['secret_key'] = $hash;
   }
 
   /*
@@ -393,7 +407,7 @@ class MultiShip_OpenApi extends MultiShip_Object
     $curl_handle = curl_init();
     curl_setopt($curl_handle, CURLOPT_URL, $this->api_url . $method);
     curl_setopt($curl_handle, CURLOPT_FOLLOWLOCATION, 1);
-    curl_setopt($curl_handle, CURLOPT_RETURNTRANSFER,1);
+    curl_setopt($curl_handle, CURLOPT_RETURNTRANSFER, 1);
     //curl_setopt($curl_handle, CURLOPT_FAILONERROR, 1);
     curl_setopt($curl_handle, CURLOPT_TIMEOUT, 60);
     curl_setopt($curl_handle, CURLOPT_POST, 1);
@@ -408,7 +422,7 @@ class MultiShip_OpenApi extends MultiShip_Object
     {
       ob_start();
       echo "-------START OpenAPI::Request(...);-------\r\n";
-      echo "REQUEST URL: \r\n".$this->api_url.$method."\r\n";
+      echo "REQUEST URL: \r\n" . $this->api_url . $method . "\r\n";
       echo "POST DATA: \r\n";
       print_r($request);
       echo "\r\n";
@@ -421,7 +435,7 @@ class MultiShip_OpenApi extends MultiShip_Object
 
     if ($this->format == 'php')
     {
-      $this->_result = (object) unserialize($curl_answer);
+      $this->_result = (object)unserialize($curl_answer);
     }
     else
     {

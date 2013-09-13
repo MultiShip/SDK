@@ -39,7 +39,7 @@ if ($_POST)
   if ($_POST['sendOrder'] && is_numeric($order_id_2))
   {
     /// получив номер заказа и поместив его в отгрузку, можем отправить заказ в службу доставки
-    $ms_api->_data['order_id'] = $order_id_2;   /// можно id нескольких заказов через запятую
+    $ms_api->_data['order_id'] = $order_id_2; /// можно id нескольких заказов через запятую
     $ms_api->_data['date_shipment'] = time();
     $response = $ms_api->request('confirmSenderOrders');
 
@@ -58,21 +58,23 @@ if ($_POST)
 
 <link rel="stylesheet" href="css/multiship.css"/>
 <form method="POST">
-  <input type="text" name="order_id_1" placeholder="ID заказа" value="<?= isset($order_id_1)?$order_id_1:"" ?>"/>
+  <input type="text" name="order_id_1" placeholder="ID заказа" value="<?= isset($order_id_1) ? $order_id_1 : "" ?>"/>
   <input name="prepareOrder" type="submit" value="Поместить заказ в отгрузку"/>
   <input name="text_1" type="hidden" value="<?= $text_1 ?>"/>
+
   <p>
-    <?= isset($order_id_1)?"Заказ: ".$order_id_1:"" ?><br>
-    <?= isset($text_1)?$text_1:"" ?>
+    <?= isset($order_id_1) ? "Заказ: " . $order_id_1 : "" ?><br>
+    <?= isset($text_1) ? $text_1 : "" ?>
   </p>
-  <input type="text" name="order_id_2" placeholder="ID заказа" value="<?= isset($order_id_2)?$order_id_2:"" ?>"/>
+  <input type="text" name="order_id_2" placeholder="ID заказа" value="<?= isset($order_id_2) ? $order_id_2 : "" ?>"/>
   <input name="sendOrder" type="submit" value="Отправить заказ в службу доставки"/>
-  <input name="text_2" type="hidden" value="<?= isset($text_2)?$text_2:"" ?>"/>
-  <p><?= isset($text_2)?$text_2:"" ?></p>
+  <input name="text_2" type="hidden" value="<?= isset($text_2) ? $text_2 : "" ?>"/>
+
+  <p><?= isset($text_2) ? $text_2 : "" ?></p>
 </form>
 <?php
 // DEBUG выводим отладочную информацию
-if(defined("MULTISHIP_DEBUG") && MULTISHIP_DEBUG)
+if (defined("MULTISHIP_DEBUG") && MULTISHIP_DEBUG)
 {
   echo "<div class='debug_panel'><br/>";
   echo nl2br($ms_api->_debug);

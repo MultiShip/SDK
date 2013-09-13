@@ -11,14 +11,15 @@ class Multiship
 {
   static function init($config = null)
   {
-	if($config == null)
-	{
-		require_once "config/config.php";
-	}
-	if(!isset($config) || !isset($config -> client_id) || ($config -> client_id == ''))
-	{
-		die(MULTISHIP_ERROR_CONFIG);
-	}
-  	return new Multiship_OpenApi($config);
+    if ($config == null)
+    {
+      require_once "config/config.php";
+    }
+    if (!isset($config) || !isset($config->client_id) || ($config->client_id == ''))
+    {
+      die(MULTISHIP_ERROR_CONFIG);
+    }
+
+    return new Multiship_OpenApi($config);
   }
 }

@@ -1,32 +1,160 @@
-  .block{width:200px;text-align: right;}
-  .wide {width:500px;}
-  .middle{width:300px;}
-  .low{width:100px;}
-  .mini{width:50px;}
-  :read-only{background-color:#e1e1e1;}
-  legend{text-align: center;}
-  table{border-collapse:collapse;width:500px;float:left;margin:5px;}
-  table.wide{width:1200px;}
-  table.middle{width:900px;}
-  table.low{width:300px;}
-  td,th,fieldset{border: 1px solid black;padding:10px;}
-  hr{border-top: 1px solid black;}
-  input{background-color:#f0f0f0;border:1px solid black;}
-  input.submit:hover{background-color:#e1e1e1;}
-  input.submit{width:222px;padding:10px;margin: 2px; cursor:pointer;}
-  input.wide{width:422px;}
-  input.middle{width:322px;}
-  input.low{width:122px;}
-  input.mini{width:48px;margin:2px;}
-  ul{height:200px;overflow-y:scroll;list-style-type:none;padding:0px;text-align:left;font-weight:normal;}
-  li{border-bottom: 1px dotted black;cursor:pointer;}
-  li:hover{background-color:#f0f0f0;}
-  textarea{width:100%;}
-  a{text-decoration: none;color: red;font-weight: bolder;}
-  div.debug_panel{width:95px;height:14px;bottom:0px;right:0px;position:fixed;background-color:#ffdddd;overflow:hidden;border:1px solid black;padding:10px;margin:0;}
-  div.debug_panel:hover{width:90%;height:90%;overflow:scroll;}
-  div.debug_panel:before{content:"DEBUG LOG:";background-color:yellow;border:1px solid black;}
-  li.delivery_variant_active{background-color: lightgreen;}
-  div.demo{float: left; padding: 30px;}
-  div.demo h3{padding-left: 30px; margin-bottom: 0;}
-  iframe.demo{border: 0;}
+.block {
+  width: 200px;
+  text-align: right;
+}
+
+.wide {
+  width: 500px;
+}
+
+.middle {
+  width: 300px;
+}
+
+.low {
+  width: 100px;
+}
+
+.mini {
+  width: 50px;
+}
+
+:read-only {
+  background-color: #e1e1e1;
+}
+
+legend {
+  text-align: center;
+}
+
+table {
+  border-collapse: collapse;
+  width: 500px;
+  float: left;
+  margin: 5px;
+}
+
+table.wide {
+  width: 1200px;
+}
+
+table.middle {
+  width: 900px;
+}
+
+table.low {
+  width: 300px;
+}
+
+td, th, fieldset {
+  border: 1px solid black;
+  padding: 10px;
+}
+
+hr {
+  border-top: 1px solid black;
+}
+
+input {
+  background-color: #f0f0f0;
+  border: 1px solid black;
+}
+
+input.submit:hover {
+  background-color: #e1e1e1;
+}
+
+input.submit {
+  width: 222px;
+  padding: 10px;
+  margin: 2px;
+  cursor: pointer;
+}
+
+input.wide {
+  width: 422px;
+}
+
+input.middle {
+  width: 322px;
+}
+
+input.low {
+  width: 122px;
+}
+
+input.mini {
+  width: 48px;
+  margin: 2px;
+}
+
+ul {
+  height: 200px;
+  overflow-y: scroll;
+  list-style-type: none;
+  padding: 0px;
+  text-align: left;
+  font-weight: normal;
+}
+
+li {
+  border-bottom: 1px dotted black;
+  cursor: pointer;
+}
+
+li:hover {
+  background-color: #f0f0f0;
+}
+
+textarea {
+  width: 100%;
+}
+
+a {
+  text-decoration: none;
+  color: red;
+  font-weight: bolder;
+}
+
+div.debug_panel {
+  width: 95px;
+  height: 14px;
+  bottom: 0px;
+  right: 0px;
+  position: fixed;
+  background-color: #ffdddd;
+  overflow: hidden;
+  border: 1px solid black;
+  padding: 10px;
+  margin: 0;
+}
+
+div.debug_panel:hover {
+  width: 90%;
+  height: 90%;
+  overflow: scroll;
+}
+
+div.debug_panel:before {
+  content: "DEBUG LOG:";
+  background-color: yellow;
+  border: 1px solid black;
+}
+
+li.delivery_variant_active {
+  background-color: lightgreen;
+}
+
+div.demo {
+  float: left;
+  padding: 30px;
+}
+
+div.demo h3 {
+  padding-left: 30px;
+  margin-bottom: 0;
+}
+
+iframe.demo {
+  border: 0;
+}

@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 // Объект - параметры доставки
 class MultiShip_Delivery extends MultiShip_Object

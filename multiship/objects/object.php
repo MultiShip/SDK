@@ -30,7 +30,7 @@ class MultiShip_Object
   */
   function fixField($name, $value)
   {
-	return is_string($value)?trim($value):$value;
+    return is_string($value) ? trim($value) : $value;
   }
 
   /*
@@ -40,18 +40,18 @@ class MultiShip_Object
   */
   function fixFields()
   {
-	foreach((array)$this as $key => $value)
-	{
-		// Игнорируем служебные параметры
-		if ($key[0] == '_')
-		{
-			continue;
-		}
-		// Вызываем CallBack дял очистки поля
-		$this->{$key} = $this->fixField($key, $value);
-	}
+    foreach ((array)$this as $key => $value)
+    {
+      // Игнорируем служебные параметры
+      if ($key[0] == '_')
+      {
+        continue;
+      }
+      // Вызываем CallBack дял очистки поля
+      $this->{$key} = $this->fixField($key, $value);
+    }
   }
-  
+
   /*
   Проверка корректности параметров запроса
   @PARAMS
@@ -65,7 +65,7 @@ class MultiShip_Object
     /// Находим незаполненные поля обязательные для заполнения
     foreach ($this->_critical as $critical)
     {
-      if (! isset($this->{$critical}) or $this->{$critical} == "")
+      if (!isset($this->{$critical}) or $this->{$critical} == "")
       {
         $this->_critical_empty[] = $critical;
       }
@@ -74,7 +74,7 @@ class MultiShip_Object
     /// Находим неверно заполненные валидируемые поля
     foreach ($this->_validation as $validation => $regexp)
     {
-      if (!isset($this->{$validation}) or ($this->{$validation} != "" and ! preg_match($regexp,$this->{$validation})))
+      if (!isset($this->{$validation}) or ($this->{$validation} != "" and !preg_match($regexp, $this->{$validation})))
       {
         $this->_validation_wrong[] = $validation;
       }
@@ -85,18 +85,21 @@ class MultiShip_Object
     {
       $this->_last_error = MULTISHIP_ERROR_VALIDATION_EMPTY;
       $this->_error_data = $this->_critical_empty;
+
       return false;
     }
     elseif (count($this->_validation_wrong) > 0)
     {
       $this->_last_error = MULTISHIP_ERROR_VALIDATION;
       $this->_error_data = $this->_validation_wrong;
+
       return false;
     }
 
     /// Если ошибки не обнаружены - заявляем об успешном завершении работы
     $this->_last_error = MULTISHIP_ERROR_SUCCESS;
     $this->_error_data = array();
+
     return true;
   }
 
@@ -111,17 +114,17 @@ class MultiShip_Object
     // Создаём рабочую копию исходного массива
     $arr_result = $arr;
 
-	// Пытаемся исправить неправильные форматы полей
-	$this->fixFields();
+    // Пытаемся исправить неправильные форматы полей
+    $this->fixFields();
 
     // Если объект не проходит валидацию, то присоединять к общему списку параметров его нельзя - ничего не делаем
-    if (! $this->validate())
+    if (!$this->validate())
     {
       return false;
     }
 
     // Добавляем параметры объекта-запроса к массиву параметров
-    foreach ((array) $this as $key => $value)
+    foreach ((array)$this as $key => $value)
     {
       // Игнорируем служебные параметры
       if ($key[0] == '_')

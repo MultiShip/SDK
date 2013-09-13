@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 // Объект - Адрес доставки
 class MultiShip_DeliveryPoint extends MultiShip_Object

@@ -51,8 +51,10 @@ if ($_POST)
   <p>Последниий статус заказа:</p>
   <input type="text" placeholder="ID заказа" name="order_id_1" value="<?= isset($_POST['order_id_1']) ? $_POST['order_id_1'] : '' ?>">
   <input type="submit" value="Узнать статус">
-  <p> <b>Статус заказа: </b><?= isset($status)?$status:"нет данных" ?></p>
+
+  <p><b>Статус заказа: </b><?= isset($status) ? $status : "нет данных" ?></p>
   <br>
+
   <p>Все статусы заказа:</p>
   <input type="text" placeholder="ID заказа" name="order_id_2" value="<?= isset($_POST['order_id_2']) ? $_POST['order_id_2'] : '' ?>">
   <input type="submit" value="Получить cписок статусов">
@@ -60,19 +62,19 @@ if ($_POST)
 <p><b>Статусы заказа:</b></p>
 <table>
   <tbody>
-    <tr>
-      <td>
-        <ul>
-          <?= isset($statuses_view)?$statuses_view:"нет данных" ?>
-        </ul>
-      </td>
-    </tr>
+  <tr>
+    <td>
+      <ul>
+        <?= isset($statuses_view) ? $statuses_view : "нет данных" ?>
+      </ul>
+    </td>
+  </tr>
   </tbody>
 </table>
 
 <?php
 // DEBUG выводим отладочную информацию
-if(defined("MULTISHIP_DEBUG") && MULTISHIP_DEBUG)
+if (defined("MULTISHIP_DEBUG") && MULTISHIP_DEBUG)
 {
   echo "<div class='debug_panel'><br/>";
   echo nl2br($ms_api->_debug);

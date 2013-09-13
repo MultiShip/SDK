@@ -1,4 +1,4 @@
-﻿<link rel="stylesheet" href="css/multiship.css"/>
+<link rel="stylesheet" href="css/multiship.css"/>
 <div class="demo">
   <h3>1й этап: Оформление нового заказа</h3>
   <iframe class="demo" src="orderCreate.php" style="min-width: 1300px; min-height: 500px;"></iframe>

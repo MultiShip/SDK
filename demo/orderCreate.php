@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /*
   Пример создания заказа
 */
@@ -53,9 +53,9 @@ if (isset($_POST))
         $delivery_point->{$key[1]} = $arg;
   }
 
-  $order->requisite = isset($ms_api->requisite_id[0])?$ms_api->requisite_id[0]:0;
-  $order->warehouse = isset($ms_api->warehouse_id[0])?$ms_api->warehouse_id[0]:0;
-  $order->sender = isset($ms_api->sender_id[0])?$ms_api->sender_id[0]:0;
+  $order->requisite = isset($ms_api->requisite_id[0]) ? $ms_api->requisite_id[0] : 0;
+  $order->warehouse = isset($ms_api->warehouse_id[0]) ? $ms_api->warehouse_id[0] : 0;
+  $order->sender = isset($ms_api->sender_id[0]) ? $ms_api->sender_id[0] : 0;
 
   if (isset($_POST['searchDeliveries']))
   {
@@ -101,14 +101,14 @@ if (isset($_POST))
   {
     foreach ($to_door->data as $variant)
     {
-      $delivery_list_view .=  '<li onclick="setDeliveryParam(this);" class="delivery_variant" delivery="'.$variant->delivery_id.'" direction="'.$variant->direction_id.'" price="'.$variant->price_id.'" pickuppoint="0" cost="'.$variant->cost.'">'.$variant->delivery_name." (".$variant->cost." руб.)<br/><b>Доставка до двери</b></li>";
+      $delivery_list_view .= '<li onclick="setDeliveryParam(this);" class="delivery_variant" delivery="' . $variant->delivery_id . '" direction="' . $variant->direction_id . '" price="' . $variant->price_id . '" pickuppoint="0" cost="' . $variant->cost . '">' . $variant->delivery_name . " (" . $variant->cost . " руб.)<br/><b>Доставка до двери</b></li>";
     }
   }
   if (is_array($pickup->data))
   {
     foreach ($pickup->data as $variant)
     {
-      $delivery_list_view .= '<li onclick="setDeliveryParam(this);" class="delivery_variant" delivery="' . $variant->delivery_id . '" direction="' . $variant->direction_id . '" price="'.$variant->price_id.'" pickuppoint="' . $variant->pickuppoint_id . '" cost="'.$variant->cost.'">' . $variant->delivery_name . " (" . $variant->cost . " руб.)<br/>" . $variant->address . "</li>";
+      $delivery_list_view .= '<li onclick="setDeliveryParam(this);" class="delivery_variant" delivery="' . $variant->delivery_id . '" direction="' . $variant->direction_id . '" price="' . $variant->price_id . '" pickuppoint="' . $variant->pickuppoint_id . '" cost="' . $variant->cost . '">' . $variant->delivery_name . " (" . $variant->cost . " руб.)<br/>" . $variant->address . "</li>";
     }
   }
 }
@@ -134,56 +134,79 @@ if (isset($_POST))
             <legend>Вложения <a href="#" id="add">+</a></legend>
             <fieldset class='block goods'>
               <legend>Товарная позиция <a href="#" class="sub">-</a></legend>
-              Арт <input name='order_item_article[0]' value='<?= isset($_POST['order_item_article'][0])? $_POST['order_item_article'][0] : 'abc' ?>'><br/>
-              Наим. <input name='order_item_name[0]' value='<?= isset($_POST['order_item_name'][0]) ? $_POST['order_item_name'][0] : 'товар' ?>'><br/>
-              К-во <input id="order_item_quantity_0" name='order_item_quantity[0]' value='<?= isset($_POST['order_item_quantity'][0]) ? $_POST['order_item_quantity'][0] : '2' ?>' onkeyup="reCalcValues()"/><br/>
-              Цена <input id="order_item_cost_0" name='order_item_cost[0]' value='<?= isset($_POST['order_item_cost'][0]) ? $_POST['order_item_cost'][0] : '1200' ?>' onkeyup="reCalcValues()"/><br/>
+              Арт
+              <input name='order_item_article[0]' value='<?= isset($_POST['order_item_article'][0]) ? $_POST['order_item_article'][0] : 'abc' ?>'><br/>
+              Наим.
+              <input name='order_item_name[0]' value='<?= isset($_POST['order_item_name'][0]) ? $_POST['order_item_name'][0] : 'товар' ?>'><br/>
+              К-во
+              <input id="order_item_quantity_0" name='order_item_quantity[0]' value='<?= isset($_POST['order_item_quantity'][0]) ? $_POST['order_item_quantity'][0] : '2' ?>' onkeyup="reCalcValues()"/><br/>
+              Цена
+              <input id="order_item_cost_0" name='order_item_cost[0]' value='<?= isset($_POST['order_item_cost'][0]) ? $_POST['order_item_cost'][0] : '1200' ?>' onkeyup="reCalcValues()"/><br/>
             </fieldset>
           </div>
           <fieldset>
             <legend>Параметры заказа</legend>
-            MS ID <input readonly='readonly' value='<?=@$_POST['order_id'];?>'><br/>
+            MS ID <input readonly='readonly' value='<?= @$_POST['order_id']; ?>'><br/>
             Номер <input name='order_num' value='<?= isset($_POST['order_num']) ? $_POST['order_num'] : 'S123' ?>'><br/>
-            Дата <input name='order_date' value='<?= isset($_POST['order_date']) ? $_POST['order_date'] : '2013-07-01' ?>'><br/>
-            Вес <input name='order_weight' value='<?= isset($_POST['order_weight']) ? $_POST['order_weight'] : '0.75' ?>'><br/>
-            Габариты <input class="mini" name='order_width' value='<?= isset($_POST['order_width']) ? $_POST['order_width'] : '10' ?>'><input class="mini" name='order_height' value='<?= isset($_POST['order_height']) ? $_POST['order_height'] : '20' ?>'><input class="mini" name='order_length' value='<?= isset($_POST['order_length']) ? $_POST['order_length'] : '30' ?>'>
+            Дата
+            <input name='order_date' value='<?= isset($_POST['order_date']) ? $_POST['order_date'] : '2013-07-01' ?>'><br/>
+            Вес
+            <input name='order_weight' value='<?= isset($_POST['order_weight']) ? $_POST['order_weight'] : '0.75' ?>'><br/>
+            Габариты
+            <input class="mini" name='order_width' value='<?= isset($_POST['order_width']) ? $_POST['order_width'] : '10' ?>'><input class="mini" name='order_height' value='<?= isset($_POST['order_height']) ? $_POST['order_height'] : '20' ?>'><input class="mini" name='order_length' value='<?= isset($_POST['order_length']) ? $_POST['order_length'] : '30' ?>'>
           </fieldset>
           <fieldset>
             <legend>Оплата</legend>
-            Оценка <input name='order_assessed_value' value='<?= isset($_POST['order_assessed_value']) ? $_POST['order_assessed_value'] : '2400' ?>'><br/>
-            Доставка <input id="delivery_cost" name='order_delivery_cost' value='<?= isset($_POST['order_delivery_cost']) ? $_POST['order_delivery_cost'] : '200' ?>' onkeyup="reCalcValues()"><br/>
-            Сумма <input id="order_cost" name="order_cost" readonly="readonly" value="<?= isset($_POST['order_cost']) ? $_POST['order_cost'] : '2400' ?>"><br/>
-            Итого <input id="order_total_cost" name="order_total_cost" readonly="readonly" value="<?= isset($_POST['order_total_cost']) ? $_POST['order_total_cost'] : '2600' ?>"><br/>
-            <input id="order_payment_method_1" type="radio" name="order_payment_method" value="1"<?= @$_POST['order_payment_method'] != 3 ? " checked" : "" ?> onclick="reCalcValues()"> наличные <input type="radio" name="order_payment_method" value='3'<?= @$_POST['order_payment_method'] == 3 ? " checked" : "" ?> onclick="reCalcValues()"> предоплата<br/>
+            Оценка
+            <input name='order_assessed_value' value='<?= isset($_POST['order_assessed_value']) ? $_POST['order_assessed_value'] : '2400' ?>'><br/>
+            Доставка
+            <input id="delivery_cost" name='order_delivery_cost' value='<?= isset($_POST['order_delivery_cost']) ? $_POST['order_delivery_cost'] : '200' ?>' onkeyup="reCalcValues()"><br/>
+            Сумма
+            <input id="order_cost" name="order_cost" readonly="readonly" value="<?= isset($_POST['order_cost']) ? $_POST['order_cost'] : '2400' ?>"><br/>
+            Итого
+            <input id="order_total_cost" name="order_total_cost" readonly="readonly" value="<?= isset($_POST['order_total_cost']) ? $_POST['order_total_cost'] : '2600' ?>"><br/>
+            <input id="order_payment_method_1" type="radio" name="order_payment_method" value="1"<?= @$_POST['order_payment_method'] != 3 ? " checked" : "" ?> onclick="reCalcValues()"> наличные
+            <input type="radio" name="order_payment_method" value='3'<?= @$_POST['order_payment_method'] == 3 ? " checked" : "" ?> onclick="reCalcValues()"> предоплата<br/>
           </fieldset>
           Комментарии<br/>
           <textarea name='order_comment'><?= isset($_POST['order_comment']) ? $_POST['order_comment'] : '' ?></textarea>
         </fieldset>
         <fieldset class='middle block' style='float: right;'>
           <legend>Данные доставки</legend>
-          <ul><?= isset($delivery_list_view)?$delivery_list_view:"" ?></ul>
-          <input type="hidden" id="direction" name='delivery_direction' value='<?=@$_POST['delivery_direction'];?>'>
-          <input type="hidden" id="delivery" name='delivery_delivery' value='<?=@$_POST['delivery_delivery'];?>'>
+          <ul><?= isset($delivery_list_view) ? $delivery_list_view : "" ?></ul>
+          <input type="hidden" id="direction" name='delivery_direction' value='<?= @$_POST['delivery_direction']; ?>'>
+          <input type="hidden" id="delivery" name='delivery_delivery' value='<?= @$_POST['delivery_delivery']; ?>'>
           <input type="hidden" id="price" name='delivery_price' value='<?= isset($_POST['delivery_price']) && is_string($_POST['delivery_price']) ? $_POST['delivery_price'] : '' ?>'>
           <input type="hidden" id="pickuppoint" name='delivery_pickuppoint' value='<?= isset($_POST['delivery_pickuppoint']) ? $_POST['delivery_pickuppoint'] : '' ?>'>
-          <input type="radio" name='delivery_to_ms_warehouse' value='1' <?=@$_POST['delivery_to_ms_warehouse']==1?"checked":"";?>> на склад MultiShip <br/>
-          <input type="radio" name='delivery_to_ms_warehouse' value='0' <?=@$_POST['delivery_to_ms_warehouse']==0?"checked":"";?>> на склад службы доставки
+          <input type="radio" name='delivery_to_ms_warehouse' value='1' <?= @$_POST['delivery_to_ms_warehouse'] == 1 ? "checked" : ""; ?>> на склад MultiShip
+          <br/>
+          <input type="radio" name='delivery_to_ms_warehouse' value='0' <?= @$_POST['delivery_to_ms_warehouse'] == 0 ? "checked" : ""; ?>> на склад службы доставки
         </fieldset>
         <fieldset class='middle block' style='float: right;'>
           <legend>Направление доставки</legend>
-          Из города <input name='sentfrom_city' value='<?= isset($_POST['sentfrom_city']) ? $_POST['sentfrom_city'] : 'Москва' ?>'><br/>
-          В город <input name='deliverypoint_city' value='<?= isset($_POST['deliverypoint_city']) ? $_POST['deliverypoint_city'] : 'Киров' ?>'><br/>
-          на улицу <input name='deliverypoint_street' value='<?= isset($_POST['deliverypoint_street']) ? $_POST['deliverypoint_street'] : 'Ленина' ?>'><br>
-          в дом <input name='deliverypoint_house' value='<?= isset($_POST['deliverypoint_house']) ? $_POST['deliverypoint_house'] : '100А' ?>'><br>
-          с индексом <input name='deliverypoint_index' value='<?= isset($_POST['deliverypoint_index']) ? $_POST['deliverypoint_index'] : '610002' ?>'><br>
+          Из города
+          <input name='sentfrom_city' value='<?= isset($_POST['sentfrom_city']) ? $_POST['sentfrom_city'] : 'Москва' ?>'><br/>
+          В город
+          <input name='deliverypoint_city' value='<?= isset($_POST['deliverypoint_city']) ? $_POST['deliverypoint_city'] : 'Киров' ?>'><br/>
+          на улицу
+          <input name='deliverypoint_street' value='<?= isset($_POST['deliverypoint_street']) ? $_POST['deliverypoint_street'] : 'Ленина' ?>'><br>
+          в дом
+          <input name='deliverypoint_house' value='<?= isset($_POST['deliverypoint_house']) ? $_POST['deliverypoint_house'] : '100А' ?>'><br>
+          с индексом
+          <input name='deliverypoint_index' value='<?= isset($_POST['deliverypoint_index']) ? $_POST['deliverypoint_index'] : '610002' ?>'><br>
         </fieldset>
         <fieldset class='middle block' style='float: right;'>
           <legend>Данные получателя</legend>
-          Фамилия <input name='recipient_last_name' value='<?= isset($_POST['recipient_last_name']) ? $_POST['recipient_last_name'] : 'Иванов' ?>'><br/>
-          Имя <input name='recipient_first_name' value='<?= isset($_POST['recipient_first_name']) ? $_POST['recipient_first_name'] : 'Пётр' ?>'><br/>
-          Отчество <input name='recipient_middle_name' value='<?= isset($_POST['recipient_middle_name']) ? $_POST['recipient_middle_name'] : '' ?>'><br/>
-          Телефон <input name='recipient_phone' value='<?= isset($_POST['recipient_phone']) ? $_POST['recipient_phone'] : '+7(912)587-45-69' ?>'><br/>
-          E-Mail <input name='recipient_email' value='<?= isset($_POST['recipient_email']) ? $_POST['recipient_email'] : '' ?>'><br/>
+          Фамилия
+          <input name='recipient_last_name' value='<?= isset($_POST['recipient_last_name']) ? $_POST['recipient_last_name'] : 'Иванов' ?>'><br/>
+          Имя
+          <input name='recipient_first_name' value='<?= isset($_POST['recipient_first_name']) ? $_POST['recipient_first_name'] : 'Пётр' ?>'><br/>
+          Отчество
+          <input name='recipient_middle_name' value='<?= isset($_POST['recipient_middle_name']) ? $_POST['recipient_middle_name'] : '' ?>'><br/>
+          Телефон
+          <input name='recipient_phone' value='<?= isset($_POST['recipient_phone']) ? $_POST['recipient_phone'] : '+7(912)587-45-69' ?>'><br/>
+          E-Mail
+          <input name='recipient_email' value='<?= isset($_POST['recipient_email']) ? $_POST['recipient_email'] : '' ?>'><br/>
           Комментарии <br/>
           <textarea name='recipient_comment'><?= isset($_POST['recipient_comment']) ? $_POST['recipient_comment'] : '' ?></textarea>
         </fieldset>
@@ -194,20 +217,20 @@ if (isset($_POST))
   </table>
 </form>
 <script>
-var lastNode;
-function setDeliveryParam(node) {
-  document.getElementById("direction").value = node.getAttribute("direction");
-  document.getElementById("delivery").value = node.getAttribute("delivery");
-  document.getElementById("price").value = node.getAttribute("price");
-  document.getElementById("pickuppoint").value = node.getAttribute("pickuppoint");
-  document.getElementById("delivery_cost").value = node.getAttribute("cost");
-  reCalcValues();
-  if (lastNode) {
-    lastNode.className = 'delivery_variant';
+  var lastNode;
+  function setDeliveryParam(node) {
+    document.getElementById("direction").value = node.getAttribute("direction");
+    document.getElementById("delivery").value = node.getAttribute("delivery");
+    document.getElementById("price").value = node.getAttribute("price");
+    document.getElementById("pickuppoint").value = node.getAttribute("pickuppoint");
+    document.getElementById("delivery_cost").value = node.getAttribute("cost");
+    reCalcValues();
+    if (lastNode) {
+      lastNode.className = 'delivery_variant';
+    }
+    node.className = 'delivery_variant_active';
+    lastNode = node;
   }
-  node.className = 'delivery_variant_active';
-  lastNode = node;
-}
 </script>
 <?php
 // DEBUG выводим отладочную информацию

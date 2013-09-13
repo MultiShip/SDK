@@ -39,7 +39,7 @@ if ($_POST)
 </form>
 <?php
 /// DEBUG выводим отладочную информацию
-if(defined("MULTISHIP_DEBUG") && MULTISHIP_DEBUG)
+if (defined("MULTISHIP_DEBUG") && MULTISHIP_DEBUG)
 {
   echo "<div class='debug_panel'><br/>";
   echo nl2br($ms_api->_debug);

@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /*
   Пример получения списка вариантов доставки до двери и до ПВЗ
 */
@@ -38,7 +38,7 @@ if ($_POST)
     $todoor_count = count($to_door->data);
     foreach ($to_door->data as $variant)
     {
-      $todoor_view .=  '<li>' . $variant->delivery_name . " (" . $variant->cost . " руб.)</li>";
+      $todoor_view .= '<li>' . $variant->delivery_name . " (" . $variant->cost . " руб.)</li>";
     }
   }
 
@@ -64,25 +64,27 @@ if ($_POST)
       <th colspan=2>
         <fieldset class='block' style='float:left;'>
           <legend>Габариты</legend>
-            X, см <input name='x' value='<?= isset($_POST['x']) ? $_POST['x'] : '10' ?>'><br/>
-            Y, см <input name='y' value='<?= isset($_POST['y']) ? $_POST['y'] : '20' ?>'><br/>
-            Z, см <input name='z' value='<?= isset($_POST['z']) ? $_POST['z'] : '30' ?>'><br/>
-            Вес, кг <input name='w' value='<?= isset($_POST['w']) ? $_POST['w'] : '0.75' ?>'>
+          X, см <input name='x' value='<?= isset($_POST['x']) ? $_POST['x'] : '10' ?>'><br/>
+          Y, см <input name='y' value='<?= isset($_POST['y']) ? $_POST['y'] : '20' ?>'><br/>
+          Z, см <input name='z' value='<?= isset($_POST['z']) ? $_POST['z'] : '30' ?>'><br/>
+          Вес, кг <input name='w' value='<?= isset($_POST['w']) ? $_POST['w'] : '0.75' ?>'>
         </fieldset>
-        <fieldset class='block'  style='float:right;'>
+        <fieldset class='block' style='float:right;'>
           <legend>Направление доставки</legend>
-            Из <input name='from' value='<?= isset($_POST['from']) ? $_POST['from'] : 'Москва' ?>'><br/>
-            До <input name='to' value='<?= isset($_POST['to']) ? $_POST['to'] : 'Киров' ?>'>
+          Из <input name='from' value='<?= isset($_POST['from']) ? $_POST['from'] : 'Москва' ?>'><br/>
+          До <input name='to' value='<?= isset($_POST['to']) ? $_POST['to'] : 'Киров' ?>'>
         </fieldset>
         <input type='submit' class='submit' value='Искать' style='float: right;'>
       </th>
     </tr>
     <tr>
       <th width='50%'>
-        Доставка до двери <hr/><?= $todoor_count ? $todoor_count : '0' ?> вариант(а/ов)
+        Доставка до двери
+        <hr/><?= $todoor_count ? $todoor_count : '0' ?> вариант(а/ов)
       </th>
       <th>
-       Доставка до ПВЗ <hr/><?= $pickup_count ? $pickup_count : '0' ?> вариант(а/ов)
+        Доставка до ПВЗ
+        <hr/><?= $pickup_count ? $pickup_count : '0' ?> вариант(а/ов)
       </th>
     </tr>
     <tr>
