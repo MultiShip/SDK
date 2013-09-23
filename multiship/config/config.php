@@ -23,5 +23,6 @@ $config->keys =
     'getSenderOrderStatuses' => '',
     'getSenderNomenclature' => '',
     'getSenderGoodsBalans' => '',
+    'getIndex' => '',
   );
     
