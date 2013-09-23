@@ -25,5 +25,6 @@ class MultiShip_Config
       'getSenderNomenclature' => '',
       'getSenderGoodsBalans' => '',
       'getCities' => '',
+      'getIndex' => '',
     );
 }
