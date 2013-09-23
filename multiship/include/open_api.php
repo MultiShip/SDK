@@ -308,6 +308,22 @@ class MultiShip_OpenApi extends MultiShip_Object
     return false;
   }
 
+  /*
+  Получение индекса по адресу
+  @PARAMS:
+    (String) city - город
+    (String) street - улица
+    (String) house - дом
+  */
+  function getIndex($city, $street, $house)
+  {
+    $this->_data = array(
+      'city' => $city,
+      'street' => $street,
+      'house' => $house,
+    );
+    return $this->request('getIndex');
+  }
 
   function _echoLabel($file, $filename)
   {
