@@ -65,7 +65,7 @@ class MultiShip_Object
     /// Находим незаполненные поля обязательные для заполнения
     foreach ($this->_critical as $critical)
     {
-      if (!isset($this->{$critical}) or $this->{$critical} == "")
+      if (!isset($this->{$critical}) or $this->{$critical} === '')
       {
         $this->_critical_empty[] = $critical;
       }
@@ -81,7 +81,7 @@ class MultiShip_Object
     }
 
     /// Проставляем ошибки валидации, если они обнаружены
-    if (count($this->_critical_empty) > 0)
+    if (count($this->_critical_empty) > 0 || count($this->_not_empty_empty) > 0)
     {
       $this->_last_error = MULTISHIP_ERROR_VALIDATION_EMPTY;
       $this->_error_data = $this->_critical_empty;
