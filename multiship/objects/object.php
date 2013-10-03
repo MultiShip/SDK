@@ -65,7 +65,7 @@ class MultiShip_Object
     /// Находим незаполненные поля обязательные для заполнения
     foreach ($this->_critical as $critical)
     {
-      if (!isset($this->{$critical}) or $this->{$critical} == "")
+      if (!isset($this->{$critical}) or $this->{$critical} === "")
       {
         $this->_critical_empty[] = $critical;
       }
