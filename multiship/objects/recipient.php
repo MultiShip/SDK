@@ -4,7 +4,7 @@
 class MultiShip_Recipient extends MultiShip_Object
 {
   var $_prefix = "recipient_";
-  var $_fields = array("first_name", "middle_name", "last_name", "phone", "email", "comment");
+  var $_fields = array("first_name", "middle_name", "last_name", "phone", "email", "comment", "time_from", "time_to");
   var $_critical = array("first_name", "last_name", "phone");
 
   function fixField($name, $value)

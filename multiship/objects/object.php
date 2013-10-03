@@ -9,12 +9,8 @@ class MultiShip_Object
   var $_fields = array();
   // (Array of Strings) Список полей, обязательных для заполнения
   var $_critical = array();
-  // (Array of Strings) Список полей, обязательных для заполнения, непустых.
-  var $_not_empty = array();
-  // (Array of Strings) После валидации - список неопределенных полей, обязательных для заполнения
-  var $_critical_empty = array();
   // (Array of Strings) После валидации - список пустых полей, обязательных для заполнения
-  var $_not_empty_empty = array();
+  var $_critical_empty = array();
   // (Array of Strings) Список валидируемых полей и соответствующих им валидаторов (regExp)
   var $_validation = array();
   // (Array of Strings) После валидации - список полей, не прошедших валидацию
@@ -64,24 +60,14 @@ class MultiShip_Object
   function validate()
   {
     $this->_critical_empty = array();
-    $this->_not_empty_empty = array();
     $this->_validation_wrong = array();
 
-    /// Находим неопределенные обязательные поля
+    /// Находим незаполненные поля обязательные для заполнения
     foreach ($this->_critical as $critical)
     {
-      if (!isset($this->{$critical}))
+      if (!isset($this->{$critical}) or $this->{$critical} === '')
       {
         $this->_critical_empty[] = $critical;
-      }
-    }
-
-    /// Находим пустые поля обязательные для заполнения
-    foreach ($this->_not_empty as $notempty)
-    {
-      if ($this->{$notempty} == "")
-      {
-        $this->_not_empty_empty[] = $notempty;
       }
     }
 
@@ -98,7 +84,7 @@ class MultiShip_Object
     if (count($this->_critical_empty) > 0 || count($this->_not_empty_empty) > 0)
     {
       $this->_last_error = MULTISHIP_ERROR_VALIDATION_EMPTY;
-      $this->_error_data = $this->_critical_empty + $this->_not_empty_empty;
+      $this->_error_data = $this->_critical_empty;
 
       return false;
     }

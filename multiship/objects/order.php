@@ -27,7 +27,6 @@ class MultiShip_Order extends MultiShip_Object
   var $_prefix = "order_";
   var $_fields = array("num", "date", "weight", "width", "height", "length", "payment_method", "delivery_cost", "assessed_value", "comment", "items", "sender", "requisite", "warehouse");
   var $_critical = array("date", "items", "assessed_value", "delivery_cost");
-  var $_not_empty = array("date", "items", "assessed_value");
 
   // Добавляем вложение в заказ
   function appendItem(MultiShip_OrderItem $item)
