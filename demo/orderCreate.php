@@ -195,7 +195,7 @@ if (isset($_POST))
           с индексом
           <input name='deliverypoint_index' value='<?= isset($_POST['deliverypoint_index']) ? $_POST['deliverypoint_index'] : '610002' ?>'><br>
         </fieldset>
-        <fieldset class='middle block' style='float: right;'>
+        <fieldset class='middle block' style='float: right; margin-bottom: -10px;'>
           <legend>Данные получателя</legend>
           Фамилия
           <input name='recipient_last_name' value='<?= isset($_POST['recipient_last_name']) ? $_POST['recipient_last_name'] : 'Иванов' ?>'><br/>
@@ -207,11 +207,15 @@ if (isset($_POST))
           <input name='recipient_phone' value='<?= isset($_POST['recipient_phone']) ? $_POST['recipient_phone'] : '+7(912)587-45-69' ?>'><br/>
           E-Mail
           <input name='recipient_email' value='<?= isset($_POST['recipient_email']) ? $_POST['recipient_email'] : '' ?>'><br/>
+          Время доставки от
+          <input name='recipient_time_from' value='<?= isset($_POST['recipient_time_from']) ? $_POST['recipient_time_from'] : '10:00:00' ?>'><br/>
+          до
+          <input name='recipient_time_to' value='<?= isset($_POST['recipient_time_to']) ? $_POST['recipient_time_to'] : '17:00:00' ?>'><br/>
           Комментарии <br/>
           <textarea name='recipient_comment'><?= isset($_POST['recipient_comment']) ? $_POST['recipient_comment'] : '' ?></textarea>
         </fieldset>
-        <input type='submit' class='middle submit' name='searchDeliveries' value='Искать варианты доставки' style='float: right;'>
-        <input type='submit' class='middle submit' name='createOrder' value='Создать'<?= $_POST ? '' : ' disabled="disabled"' ?> style='float: right;'>
+        <input type='submit' class='middle submit' name='searchDeliveries' value='Искать варианты доставки' style='float: right; margin-top: 20px;'>
+        <input type='submit' class='middle submit' name='createOrder' value='Создать'<?= $_POST ? '' : ' disabled="disabled"' ?> style='float: right; margin-top: 20px;'>
       </th>
     </tr>
   </table>
