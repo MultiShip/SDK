@@ -43,20 +43,20 @@ if ($_POST)
     <tr>
       <th>
         Список заказов ваших магазинов
-        <hr/><?= isset($orders_count) ? $orders_count : '0' ?> заказ(а/ов)
+        <hr/><?php echo isset($orders_count) ? $orders_count : '0' ?> заказ(а/ов)
       </th>
     </tr>
     <tr>
       <td>
         <ul>
-          <?= isset($orders_view) ? $orders_view : "" ?>
+          <?php echo isset($orders_view) ? $orders_view : "" ?>
         </ul>
       </td>
     </tr>
     <tr>
       <td>
         Выводить последние
-        <input name='limit' value='<?= isset($_POST['limit']) ? $_POST['limit'] : '10' ?>' style="width: 50px;"/>
+        <input name='limit' value='<?php echo isset($_POST['limit']) ? $_POST['limit'] : '10' ?>' style="width: 50px;"/>
         <input type='submit' class='submit' value='Искать' style='float: right;'>
       </td>
     </tr>

@@ -325,6 +325,23 @@ class MultiShip_OpenApi extends MultiShip_Object
     return $this->request('getIndex');
   }
 
+  /*
+  Автокомплит
+  @PARAMS:
+    (String) term - вводимые данные
+    (String) type - city/street
+    (String) city_name -  город
+  */
+  function autocomplete($term, $type, $city_name = '')
+  {
+    $this->_data = array(
+      'type' => $type,
+      'term' => $term,
+      'city_name' => $city_name
+    );
+    return $this->request('autocomplete');
+  }
+
   function _echoLabel($file, $filename)
   {
     header('Pragma: public');

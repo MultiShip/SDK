@@ -49,14 +49,14 @@ if ($_POST)
 <link rel="stylesheet" href="css/multiship.css">
 <form method="POST">
   <p>Последниий статус заказа:</p>
-  <input type="text" placeholder="ID заказа" name="order_id_1" value="<?= isset($_POST['order_id_1']) ? $_POST['order_id_1'] : '' ?>">
+  <input type="text" placeholder="ID заказа" name="order_id_1" value="<?php echo isset($_POST['order_id_1']) ? $_POST['order_id_1'] : '' ?>">
   <input type="submit" value="Узнать статус">
 
-  <p><b>Статус заказа: </b><?= isset($status) ? $status : "нет данных" ?></p>
+  <p><b>Статус заказа: </b><?php echo isset($status) ? $status : "нет данных" ?></p>
   <br>
 
   <p>Все статусы заказа:</p>
-  <input type="text" placeholder="ID заказа" name="order_id_2" value="<?= isset($_POST['order_id_2']) ? $_POST['order_id_2'] : '' ?>">
+  <input type="text" placeholder="ID заказа" name="order_id_2" value="<?php echo isset($_POST['order_id_2']) ? $_POST['order_id_2'] : '' ?>">
   <input type="submit" value="Получить cписок статусов">
 </form>
 <p><b>Статусы заказа:</b></p>
@@ -65,7 +65,7 @@ if ($_POST)
   <tr>
     <td>
       <ul>
-        <?= isset($statuses_view) ? $statuses_view : "нет данных" ?>
+        <?php echo isset($statuses_view) ? $statuses_view : "нет данных" ?>
       </ul>
     </td>
   </tr>

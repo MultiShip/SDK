@@ -9,10 +9,11 @@
     (Float n,2) height  Высота посылки.
     (Float n,2) width  Ширина посылки.
     (Float n,2) length  Длина посылки.
+    (Integer) index_city Индекс получателя
 	(String) create_date Дата создания заказа
 */
 class MultiShip_RequestDeliveryList extends MultiShip_Object
 {
-  var $_fields = array("city_from", "city_to", "weight", "height", "width", "length", "create_date");
+  var $_fields = array("city_from", "city_to", "weight", "height", "width", "length", "create_date", "index_city");
   var $_critical = array("city_from", "city_to", "weight", "height", "width", "length");
 }
