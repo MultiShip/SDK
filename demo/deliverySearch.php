@@ -64,15 +64,15 @@ if ($_POST)
       <th colspan=2>
         <fieldset class='block' style='float:left;'>
           <legend>Габариты</legend>
-          X, см <input name='x' value='<?= isset($_POST['x']) ? $_POST['x'] : '10' ?>'><br/>
-          Y, см <input name='y' value='<?= isset($_POST['y']) ? $_POST['y'] : '20' ?>'><br/>
-          Z, см <input name='z' value='<?= isset($_POST['z']) ? $_POST['z'] : '30' ?>'><br/>
-          Вес, кг <input name='w' value='<?= isset($_POST['w']) ? $_POST['w'] : '0.75' ?>'>
+          X, см <input name='x' value='<?php echo isset($_POST['x']) ? $_POST['x'] : '10' ?>'><br/>
+          Y, см <input name='y' value='<?php echo isset($_POST['y']) ? $_POST['y'] : '20' ?>'><br/>
+          Z, см <input name='z' value='<?php echo isset($_POST['z']) ? $_POST['z'] : '30' ?>'><br/>
+          Вес, кг <input name='w' value='<?php echo isset($_POST['w']) ? $_POST['w'] : '0.75' ?>'>
         </fieldset>
         <fieldset class='block' style='float:right;'>
           <legend>Направление доставки</legend>
-          Из <input name='from' value='<?= isset($_POST['from']) ? $_POST['from'] : 'Москва' ?>'><br/>
-          До <input name='to' value='<?= isset($_POST['to']) ? $_POST['to'] : 'Киров' ?>'>
+          Из <input name='from' value='<?php echo isset($_POST['from']) ? $_POST['from'] : 'Москва' ?>'><br/>
+          До <input name='to' value='<?php echo isset($_POST['to']) ? $_POST['to'] : 'Киров' ?>'>
         </fieldset>
         <input type='submit' class='submit' value='Искать' style='float: right;'>
       </th>
@@ -80,19 +80,19 @@ if ($_POST)
     <tr>
       <th width='50%'>
         Доставка до двери
-        <hr/><?= $todoor_count ? $todoor_count : '0' ?> вариант(а/ов)
+        <hr/><?php echo $todoor_count ? $todoor_count : '0' ?> вариант(а/ов)
       </th>
       <th>
         Доставка до ПВЗ
-        <hr/><?= $pickup_count ? $pickup_count : '0' ?> вариант(а/ов)
+        <hr/><?php echo $pickup_count ? $pickup_count : '0' ?> вариант(а/ов)
       </th>
     </tr>
     <tr>
       <td>
-        <ul><?= $todoor_view ?></ul>
+        <ul><?php echo $todoor_view ?></ul>
       </td>
       <td>
-        <ul><?= $pickup_view ?></ul>
+        <ul><?php echo $pickup_view ?></ul>
       </td>
     </tr>
   </table>

@@ -90,21 +90,21 @@ if (isset($_POST))
   }
 
   // Собираем список вариантов доставки (см. deliverySearch.php для подробного описания)
-  $delivery_list_request = new MultiShip_RequestDeliveryList(@$_POST['sentfrom_city'], @$_POST['deliverypoint_city'], @$_POST['order_weight'], @$_POST['order_width'], @$_POST['order_height'], @$_POST['order_length']);
+  $delivery_list_request = new MultiShip_RequestDeliveryList(@$_POST['sentfrom_city'], @$_POST['deliverypoint_city'], @$_POST['order_weight'], @$_POST['order_width'], @$_POST['order_height'], @$_POST['order_length'], '', @$_POST['deliverypoint_index']);
   $delivery_list_request->delivery_type = "todoor";
   $to_door = $ms_api->searchDeliveryList($delivery_list_request, $delivery_point);
   $delivery_list_request->delivery_type = "pickup";
   $pickup = $ms_api->searchDeliveryList($delivery_list_request);
 
   $delivery_list_view = '';
-  if (is_array($to_door->data))
+  if (isset($to_door->data) && is_array($to_door->data))
   {
     foreach ($to_door->data as $variant)
     {
       $delivery_list_view .= '<li onclick="setDeliveryParam(this);" class="delivery_variant" delivery="' . $variant->delivery_id . '" direction="' . $variant->direction_id . '" price="' . $variant->price_id . '" pickuppoint="0" cost="' . $variant->cost . '">' . $variant->delivery_name . " (" . $variant->cost . " руб.)<br/><b>Доставка до двери</b></li>";
     }
   }
-  if (is_array($pickup->data))
+  if (isset($pickup->data) && is_array($pickup->data))
   {
     foreach ($pickup->data as $variant)
     {
@@ -131,91 +131,91 @@ if (isset($_POST))
         <fieldset class='wide block' style='float:left;'>
           <legend>Данные заказа</legend>
           <div style="overflow-y:scroll;overflow-x:hidden;float:left;height:300px;">
-            <legend>Вложения <a href="#" id="add">+</a></legend>
+            <legend>Вложения</legend>
             <fieldset class='block goods'>
               <legend>Товарная позиция <a href="#" class="sub">-</a></legend>
               Арт
-              <input name='order_item_article[0]' value='<?= isset($_POST['order_item_article'][0]) ? $_POST['order_item_article'][0] : 'abc' ?>'><br/>
+              <input name='order_item_article[0]' value='<?php echo isset($_POST['order_item_article'][0]) ? $_POST['order_item_article'][0] : 'abc' ?>'><br/>
               Наим.
-              <input name='order_item_name[0]' value='<?= isset($_POST['order_item_name'][0]) ? $_POST['order_item_name'][0] : 'товар' ?>'><br/>
+              <input name='order_item_name[0]' value='<?php echo isset($_POST['order_item_name'][0]) ? $_POST['order_item_name'][0] : 'товар' ?>'><br/>
               К-во
-              <input id="order_item_quantity_0" name='order_item_quantity[0]' value='<?= isset($_POST['order_item_quantity'][0]) ? $_POST['order_item_quantity'][0] : '2' ?>' onkeyup="reCalcValues()"/><br/>
+              <input id="order_item_quantity_0" name='order_item_quantity[0]' value='<?php echo isset($_POST['order_item_quantity'][0]) ? $_POST['order_item_quantity'][0] : '2' ?>' onkeyup="reCalcValues()"/><br/>
               Цена
-              <input id="order_item_cost_0" name='order_item_cost[0]' value='<?= isset($_POST['order_item_cost'][0]) ? $_POST['order_item_cost'][0] : '1200' ?>' onkeyup="reCalcValues()"/><br/>
+              <input id="order_item_cost_0" name='order_item_cost[0]' value='<?php echo isset($_POST['order_item_cost'][0]) ? $_POST['order_item_cost'][0] : '1200' ?>' onkeyup="reCalcValues()"/><br/>
             </fieldset>
           </div>
           <fieldset>
             <legend>Параметры заказа</legend>
-            MS ID <input readonly='readonly' value='<?= @$_POST['order_id']; ?>'><br/>
-            Номер <input name='order_num' value='<?= isset($_POST['order_num']) ? $_POST['order_num'] : 'S123' ?>'><br/>
+            MS ID <input readonly='readonly' value='<?php echo @$_POST['order_id']; ?>'><br/>
+            Номер <input name='order_num' value='<?php echo isset($_POST['order_num']) ? $_POST['order_num'] : 'S123' ?>'><br/>
             Дата
-            <input name='order_date' value='<?= isset($_POST['order_date']) ? $_POST['order_date'] : '2013-07-01' ?>'><br/>
+            <input name='order_date' value='<?php echo isset($_POST['order_date']) ? $_POST['order_date'] : '2013-07-01' ?>'><br/>
             Вес
-            <input name='order_weight' value='<?= isset($_POST['order_weight']) ? $_POST['order_weight'] : '0.75' ?>'><br/>
+            <input name='order_weight' value='<?php echo isset($_POST['order_weight']) ? $_POST['order_weight'] : '0.75' ?>'><br/>
             Габариты
-            <input class="mini" name='order_width' value='<?= isset($_POST['order_width']) ? $_POST['order_width'] : '10' ?>'><input class="mini" name='order_height' value='<?= isset($_POST['order_height']) ? $_POST['order_height'] : '20' ?>'><input class="mini" name='order_length' value='<?= isset($_POST['order_length']) ? $_POST['order_length'] : '30' ?>'>
+            <input class="mini" name='order_width' value='<?php echo isset($_POST['order_width']) ? $_POST['order_width'] : '10' ?>'><input class="mini" name='order_height' value='<?php echo isset($_POST['order_height']) ? $_POST['order_height'] : '20' ?>'><input class="mini" name='order_length' value='<?php echo isset($_POST['order_length']) ? $_POST['order_length'] : '30' ?>'>
           </fieldset>
           <fieldset>
             <legend>Оплата</legend>
             Оценка
-            <input name='order_assessed_value' value='<?= isset($_POST['order_assessed_value']) ? $_POST['order_assessed_value'] : '2400' ?>'><br/>
+            <input name='order_assessed_value' value='<?php echo isset($_POST['order_assessed_value']) ? $_POST['order_assessed_value'] : '2400' ?>'><br/>
             Доставка
-            <input id="delivery_cost" name='order_delivery_cost' value='<?= isset($_POST['order_delivery_cost']) ? $_POST['order_delivery_cost'] : '200' ?>' onkeyup="reCalcValues()"><br/>
+            <input id="delivery_cost" name='order_delivery_cost' value='<?php echo isset($_POST['order_delivery_cost']) ? $_POST['order_delivery_cost'] : '200' ?>' onkeyup="reCalcValues()"><br/>
             Сумма
-            <input id="order_cost" name="order_cost" readonly="readonly" value="<?= isset($_POST['order_cost']) ? $_POST['order_cost'] : '2400' ?>"><br/>
+            <input id="order_cost" name="order_cost" readonly="readonly" value="<?php echo isset($_POST['order_cost']) ? $_POST['order_cost'] : '2400' ?>"><br/>
             Итого
-            <input id="order_total_cost" name="order_total_cost" readonly="readonly" value="<?= isset($_POST['order_total_cost']) ? $_POST['order_total_cost'] : '2600' ?>"><br/>
-            <input id="order_payment_method_1" type="radio" name="order_payment_method" value="1"<?= @$_POST['order_payment_method'] != 3 ? " checked" : "" ?> onclick="reCalcValues()"> наличные
-            <input type="radio" name="order_payment_method" value='3'<?= @$_POST['order_payment_method'] == 3 ? " checked" : "" ?> onclick="reCalcValues()"> предоплата<br/>
+            <input id="order_total_cost" name="order_total_cost" readonly="readonly" value="<?php echo isset($_POST['order_total_cost']) ? $_POST['order_total_cost'] : '2600' ?>"><br/>
+            <input id="order_payment_method_1" type="radio" name="order_payment_method" value="1"<?php echo @$_POST['order_payment_method'] != 3 ? " checked" : "" ?> onclick="reCalcValues()"> наличные
+            <input type="radio" name="order_payment_method" value='3'<?php echo @$_POST['order_payment_method'] == 3 ? " checked" : "" ?> onclick="reCalcValues()"> предоплата<br/>
           </fieldset>
           Комментарии<br/>
-          <textarea name='order_comment'><?= isset($_POST['order_comment']) ? $_POST['order_comment'] : '' ?></textarea>
+          <textarea name='order_comment'><?php echo isset($_POST['order_comment']) ? $_POST['order_comment'] : '' ?></textarea>
         </fieldset>
         <fieldset class='middle block' style='float: right;'>
           <legend>Данные доставки</legend>
-          <ul><?= isset($delivery_list_view) ? $delivery_list_view : "" ?></ul>
-          <input type="hidden" id="direction" name='delivery_direction' value='<?= @$_POST['delivery_direction']; ?>'>
-          <input type="hidden" id="delivery" name='delivery_delivery' value='<?= @$_POST['delivery_delivery']; ?>'>
-          <input type="hidden" id="price" name='delivery_price' value='<?= isset($_POST['delivery_price']) && is_string($_POST['delivery_price']) ? $_POST['delivery_price'] : '' ?>'>
-          <input type="hidden" id="pickuppoint" name='delivery_pickuppoint' value='<?= isset($_POST['delivery_pickuppoint']) ? $_POST['delivery_pickuppoint'] : '' ?>'>
-          <input type="radio" name='delivery_to_ms_warehouse' value='1' <?= @$_POST['delivery_to_ms_warehouse'] == 1 ? "checked" : ""; ?>> на склад MultiShip
+          <ul><?php echo isset($delivery_list_view) ? $delivery_list_view : "" ?></ul>
+          <input type="hidden" id="direction" name='delivery_direction' value='<?php echo @$_POST['delivery_direction']; ?>'>
+          <input type="hidden" id="delivery" name='delivery_delivery' value='<?php echo @$_POST['delivery_delivery']; ?>'>
+          <input type="hidden" id="price" name='delivery_price' value='<?php echo isset($_POST['delivery_price']) && is_string($_POST['delivery_price']) ? $_POST['delivery_price'] : '' ?>'>
+          <input type="hidden" id="pickuppoint" name='delivery_pickuppoint' value='<?php echo isset($_POST['delivery_pickuppoint']) ? $_POST['delivery_pickuppoint'] : '' ?>'>
+          <input type="radio" name='delivery_to_ms_warehouse' value='1' <?php echo @$_POST['delivery_to_ms_warehouse'] == 1 ? "checked" : ""; ?>> на склад MultiShip
           <br/>
-          <input type="radio" name='delivery_to_ms_warehouse' value='0' <?= @$_POST['delivery_to_ms_warehouse'] == 0 ? "checked" : ""; ?>> на склад службы доставки
+          <input type="radio" name='delivery_to_ms_warehouse' value='0' <?php echo @$_POST['delivery_to_ms_warehouse'] == 0 ? "checked" : ""; ?>> на склад службы доставки
         </fieldset>
         <fieldset class='middle block' style='float: right;'>
           <legend>Направление доставки</legend>
           Из города
-          <input name='sentfrom_city' value='<?= isset($_POST['sentfrom_city']) ? $_POST['sentfrom_city'] : 'Москва' ?>'><br/>
+          <input name='sentfrom_city' value='<?php echo isset($_POST['sentfrom_city']) ? $_POST['sentfrom_city'] : 'Москва' ?>'><br/>
           В город
-          <input name='deliverypoint_city' value='<?= isset($_POST['deliverypoint_city']) ? $_POST['deliverypoint_city'] : 'Киров' ?>'><br/>
+          <input name='deliverypoint_city' value='<?php echo isset($_POST['deliverypoint_city']) ? $_POST['deliverypoint_city'] : 'Киров' ?>'><br/>
           на улицу
-          <input name='deliverypoint_street' value='<?= isset($_POST['deliverypoint_street']) ? $_POST['deliverypoint_street'] : 'Ленина' ?>'><br>
+          <input name='deliverypoint_street' value='<?php echo isset($_POST['deliverypoint_street']) ? $_POST['deliverypoint_street'] : 'Ленина' ?>'><br>
           в дом
-          <input name='deliverypoint_house' value='<?= isset($_POST['deliverypoint_house']) ? $_POST['deliverypoint_house'] : '100А' ?>'><br>
+          <input name='deliverypoint_house' value='<?php echo isset($_POST['deliverypoint_house']) ? $_POST['deliverypoint_house'] : '100А' ?>'><br>
           с индексом
-          <input name='deliverypoint_index' value='<?= isset($_POST['deliverypoint_index']) ? $_POST['deliverypoint_index'] : '610002' ?>'><br>
+          <input name='deliverypoint_index' value='<?php echo isset($_POST['deliverypoint_index']) ? $_POST['deliverypoint_index'] : '610002' ?>'><br>
         </fieldset>
         <fieldset class='middle block' style='float: right; margin-bottom: -10px;'>
           <legend>Данные получателя</legend>
           Фамилия
-          <input name='recipient_last_name' value='<?= isset($_POST['recipient_last_name']) ? $_POST['recipient_last_name'] : 'Иванов' ?>'><br/>
+          <input name='recipient_last_name' value='<?php echo isset($_POST['recipient_last_name']) ? $_POST['recipient_last_name'] : 'Иванов' ?>'><br/>
           Имя
-          <input name='recipient_first_name' value='<?= isset($_POST['recipient_first_name']) ? $_POST['recipient_first_name'] : 'Пётр' ?>'><br/>
+          <input name='recipient_first_name' value='<?php echo isset($_POST['recipient_first_name']) ? $_POST['recipient_first_name'] : 'Пётр' ?>'><br/>
           Отчество
-          <input name='recipient_middle_name' value='<?= isset($_POST['recipient_middle_name']) ? $_POST['recipient_middle_name'] : '' ?>'><br/>
+          <input name='recipient_middle_name' value='<?php echo isset($_POST['recipient_middle_name']) ? $_POST['recipient_middle_name'] : '' ?>'><br/>
           Телефон
-          <input name='recipient_phone' value='<?= isset($_POST['recipient_phone']) ? $_POST['recipient_phone'] : '+7(912)587-45-69' ?>'><br/>
+          <input name='recipient_phone' value='<?php echo isset($_POST['recipient_phone']) ? $_POST['recipient_phone'] : '+7(912)587-45-69' ?>'><br/>
           E-Mail
-          <input name='recipient_email' value='<?= isset($_POST['recipient_email']) ? $_POST['recipient_email'] : '' ?>'><br/>
+          <input name='recipient_email' value='<?php echo isset($_POST['recipient_email']) ? $_POST['recipient_email'] : '' ?>'><br/>
           Время доставки от
-          <input name='recipient_time_from' value='<?= isset($_POST['recipient_time_from']) ? $_POST['recipient_time_from'] : '10:00:00' ?>'><br/>
+          <input name='recipient_time_from' value='<?php echo isset($_POST['recipient_time_from']) ? $_POST['recipient_time_from'] : '10:00:00' ?>'><br/>
           до
-          <input name='recipient_time_to' value='<?= isset($_POST['recipient_time_to']) ? $_POST['recipient_time_to'] : '17:00:00' ?>'><br/>
+          <input name='recipient_time_to' value='<?php echo isset($_POST['recipient_time_to']) ? $_POST['recipient_time_to'] : '17:00:00' ?>'><br/>
           Комментарии <br/>
-          <textarea name='recipient_comment'><?= isset($_POST['recipient_comment']) ? $_POST['recipient_comment'] : '' ?></textarea>
+          <textarea name='recipient_comment'><?php echo isset($_POST['recipient_comment']) ? $_POST['recipient_comment'] : '' ?></textarea>
         </fieldset>
         <input type='submit' class='middle submit' name='searchDeliveries' value='Искать варианты доставки' style='float: right; margin-top: 20px;'>
-        <input type='submit' class='middle submit' name='createOrder' value='Создать'<?= $_POST ? '' : ' disabled="disabled"' ?> style='float: right; margin-top: 20px;'>
+        <input type='submit' class='middle submit' name='createOrder' value='Создать'<?php echo $_POST ? '' : ' disabled="disabled"' ?> style='float: right; margin-top: 20px;'>
       </th>
     </tr>
   </table>

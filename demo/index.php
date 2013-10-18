@@ -1,7 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>DEMO SDK</title>
+  <meta charset="UTF-8">
+</head>
+<body>
 <link rel="stylesheet" href="css/multiship.css"/>
 <div class="demo">
   <h3>1й этап: Оформление нового заказа</h3>
   <iframe class="demo" src="orderCreate.php" style="min-width: 1300px; min-height: 580px;"></iframe>
+</div>
+<div class="demo">
+  <h3>Автодополнение</h3>
+  <iframe class="demo" src="autocomplete.php" style="min-width: 250px; min-height: 350px;"></iframe>
 </div>
 <div class="demo">
   <h3>2й этап: Отправка данных о заказе в службу доставки</h3>
@@ -19,3 +30,5 @@
   <h3>5й этап: Просмотр списка созданных заказов</h3>
   <iframe class="demo" src="orderList.php" style="min-width: 550px; min-height: 450px;"></iframe>
 </div>
+</body>
+</html>
