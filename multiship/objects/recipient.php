@@ -15,9 +15,9 @@ class MultiShip_Recipient extends MultiShip_Object
       {
         if(is_array($value))
         {
-          foreach($value as $k => $v)
+          foreach($value as $key => $phone)
           {
-            $value[$k] = preg_replace("/[^0-9]/", '', $v);
+            $value[$key] = preg_replace("/[^0-9]/", '', $phone);
           }
         }
         else
