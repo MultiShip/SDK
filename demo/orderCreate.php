@@ -208,9 +208,9 @@ if (isset($_POST))
           E-Mail
           <input name='recipient_email' value='<?php echo isset($_POST['recipient_email']) ? $_POST['recipient_email'] : '' ?>'><br/>
           Время доставки от
-          <input name='recipient_time_from' value='<?php echo isset($_POST['recipient_time_from']) ? $_POST['recipient_time_from'] : '10:00:00' ?>'><br/>
+          <input name='recipient_time_from' value='<?php echo isset($_POST['recipient_time_from']) ? $_POST['recipient_time_from'] : '10:00' ?>'><br/>
           до
-          <input name='recipient_time_to' value='<?php echo isset($_POST['recipient_time_to']) ? $_POST['recipient_time_to'] : '17:00:00' ?>'><br/>
+          <input name='recipient_time_to' value='<?php echo isset($_POST['recipient_time_to']) ? $_POST['recipient_time_to'] : '17:00' ?>'><br/>
           Комментарии <br/>
           <textarea name='recipient_comment'><?php echo isset($_POST['recipient_comment']) ? $_POST['recipient_comment'] : '' ?></textarea>
         </fieldset>
