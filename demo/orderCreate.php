@@ -101,14 +101,14 @@ if (isset($_POST))
   {
     foreach ($to_door->data as $variant)
     {
-      $delivery_list_view .= '<li onclick="setDeliveryParam(this);" class="delivery_variant" delivery="' . $variant->delivery_id . '" direction="' . $variant->direction_id . '" price="' . $variant->price_id . '" pickuppoint="0" cost="' . $variant->cost . '">' . $variant->delivery_name . " (" . $variant->cost . " руб.)<br/><b>Доставка до двери</b></li>";
+      $delivery_list_view .= '<li onclick="setDeliveryParam(this);" class="delivery_variant" delivery="' . $variant->delivery_id . '" direction="' . $variant->direction_id . '" price="' . $variant->price_id . '" pickuppoint="0" cost="' . $variant->cost_with_rules . '">' . $variant->delivery_name . " (" . $variant->cost_with_rules . " руб.)<br/><b>Доставка до двери</b></li>";
     }
   }
   if (isset($pickup->data) && is_array($pickup->data))
   {
     foreach ($pickup->data as $variant)
     {
-      $delivery_list_view .= '<li onclick="setDeliveryParam(this);" class="delivery_variant" delivery="' . $variant->delivery_id . '" direction="' . $variant->direction_id . '" price="' . $variant->price_id . '" pickuppoint="' . $variant->pickuppoint_id . '" cost="' . $variant->cost . '">' . $variant->delivery_name . " (" . $variant->cost . " руб.)<br/>" . $variant->address . "</li>";
+      $delivery_list_view .= '<li onclick="setDeliveryParam(this);" class="delivery_variant" delivery="' . $variant->delivery_id . '" direction="' . $variant->direction_id . '" price="' . $variant->price_id . '" pickuppoint="' . $variant->pickuppoint_id . '" cost="' . $variant->cost_with_rules . '">' . $variant->delivery_name . " (" . $variant->cost_with_rules . " руб.)<br/>" . $variant->address . "</li>";
     }
   }
 }
