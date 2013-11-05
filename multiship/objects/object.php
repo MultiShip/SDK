@@ -59,6 +59,7 @@ class MultiShip_Object
   */
   function validate()
   {
+    return true; //отключаем валидацию SDK
     $this->_critical_empty = array();
     $this->_validation_wrong = array();
 

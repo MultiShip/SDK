@@ -85,7 +85,17 @@ if (isset($_POST))
     }
     elseif ($order_new->status == "error")
     {
-      echo "Ошибка: " . $order_new->data;
+      echo "Ошибки: <br>";
+      foreach ($order_new->data as $errorData)
+      {
+        foreach ($errorData->errors as $fieldName => $fieldErrors)
+        {
+          foreach ($fieldErrors as $errorMessage)
+          {
+            echo $errorMessage . '<br>';
+          }
+        }
+      }
     }
   }
 
