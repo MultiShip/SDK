@@ -89,6 +89,33 @@ if (isset($_POST))
     }
   }
 
+  if (isset($_POST['editOrder']))
+  {
+    $order->appendItem($orderitem);
+
+    $order_renew = $ms_api->editOrder($order, $recipient, $delivery, $delivery_point);
+
+    if ($order_renew == false && $ms_api->_error)
+    {
+      echo $ms_api->_error;
+    }
+
+    // Если заказ успешно сохранился - обновляем данные формы
+    if ($order_renew->status == "ok")
+    {
+      foreach ($order_renew->data as $key => $value)
+      {
+        $_POST[$key] = $value;
+      }
+
+      echo "Заказ успешно отредактирован. ID заказа: " . $order_renew->data->order_id;
+    }
+    elseif ($order_renew->status == "error")
+    {
+      echo "Ошибка: " . $order_renew->data;
+    }
+  }
+
   // Собираем список вариантов доставки (см. deliverySearch.php для подробного описания)
   $delivery_list_request = new MultiShip_RequestDeliveryList(@$_POST['sentfrom_city'], @$_POST['deliverypoint_city'], @$_POST['order_weight'], @$_POST['order_width'], @$_POST['order_height'], @$_POST['order_length'], '', @$_POST['deliverypoint_index']);
   $delivery_list_request->delivery_type = "todoor";
@@ -147,6 +174,7 @@ if (isset($_POST))
           <fieldset>
             <legend>Параметры заказа</legend>
             MS ID <input readonly='readonly' value='<?php echo @$_POST['order_id']; ?>'><br/>
+            MS ID <input name='order_id' value='<?php echo isset($_POST['order_id']) ? $_POST['order_id'] : '' ?>'><br/>
             Номер <input name='order_num' value='<?php echo isset($_POST['order_num']) ? $_POST['order_num'] : 'S123' ?>'><br/>
             Дата
             <input name='order_date' value='<?php echo isset($_POST['order_date']) ? $_POST['order_date'] : '2013-07-01' ?>'><br/>
@@ -208,14 +236,15 @@ if (isset($_POST))
           E-Mail
           <input name='recipient_email' value='<?php echo isset($_POST['recipient_email']) ? $_POST['recipient_email'] : '' ?>'><br/>
           Время доставки от
-          <input name='recipient_time_from' value='<?php echo isset($_POST['recipient_time_from']) ? $_POST['recipient_time_from'] : '10:00' ?>'><br/>
+          <input name='recipient_time_from' value='<?php echo isset($_POST['recipient_time_from']) ? $_POST['recipient_time_from'] : '12:00' ?>'><br/>
           до
-          <input name='recipient_time_to' value='<?php echo isset($_POST['recipient_time_to']) ? $_POST['recipient_time_to'] : '17:00' ?>'><br/>
+          <input name='recipient_time_to' value='<?php echo isset($_POST['recipient_time_to']) ? $_POST['recipient_time_to'] : '14:00' ?>'><br/>
           Комментарии <br/>
           <textarea name='recipient_comment'><?php echo isset($_POST['recipient_comment']) ? $_POST['recipient_comment'] : '' ?></textarea>
         </fieldset>
         <input type='submit' class='middle submit' name='searchDeliveries' value='Искать варианты доставки' style='float: right; margin-top: 20px;'>
         <input type='submit' class='middle submit' name='createOrder' value='Создать'<?php echo $_POST ? '' : ' disabled="disabled"' ?> style='float: right; margin-top: 20px;'>
+        <br/><input type='submit' class='middle submit' name='editOrder' value='Редактировать'<?php echo $_POST ? '' : ' disabled="disabled"' ?> style='float: right; margin-top: 20px;'>
       </th>
     </tr>
   </table>
