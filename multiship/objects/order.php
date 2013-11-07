@@ -25,8 +25,9 @@
 class MultiShip_Order extends MultiShip_Object
 {
   var $_prefix = "order_";
-  var $_fields = array("num", "date", "weight", "width", "height", "length", "payment_method", "delivery_cost", "assessed_value", "comment", "items", "sender", "requisite", "warehouse");
-  var $_critical = array("date", "items", "assessed_value", "delivery_cost");
+  var $_fields = array("id", "num", "date", "weight", "width", "height", "length", "payment_method", "delivery_cost", "assessed_value", "comment", "items", "sender", "requisite", "warehouse");
+  var $_critical = array("date", "items", "assessed_value", "delivery_cost", "weight", "width", "height", "length");
+  var $_wrongItem;
 
   // Добавляем вложение в заказ
   function appendItem(MultiShip_OrderItem $item)
@@ -35,6 +36,23 @@ class MultiShip_Order extends MultiShip_Object
     {
       $this->items = array();
     }
-    $item->appendToArray($this->items[count($this->items)], true);
+    $appended = $item->appendToArray($this->items[count($this->items)], true);
+    if(!$appended)
+    {
+      $this->_wrongItem = $item;
+    }
+  }
+  function validate()
+  {
+    $validated = parent::validate();
+    if($this->_wrongItem)
+    {
+      if(!$this->_wrongItem->validate())
+      {
+        $validated = false;
+      }
+    }
+
+    return $validated;
   }
 }
