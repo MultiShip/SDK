@@ -75,7 +75,7 @@ if (isset($_POST))
     }
 
     // Если заказ успешно сохранился - обновляем данные формы
-    if ($order_new->status == "ok")
+    if (isset($order_new->status) && $order_new->status == "ok")
     {
       foreach ($order_new->data as $key => $value)
       {
@@ -83,7 +83,7 @@ if (isset($_POST))
       }
       echo "Заказ успешно создан. ID заказа: " . $order_new->data->order_id;
     }
-    elseif ($order_new->status == "error")
+    elseif (isset($order_new->status) && $order_new->status == "error")
     {
       echo "Ошибка: " . $order_new->data;
     }
@@ -143,6 +143,7 @@ if (isset($_POST))
               Цена
               <input id="order_item_cost_0" name='order_item_cost[0]' value='<?php echo isset($_POST['order_item_cost'][0]) ? $_POST['order_item_cost'][0] : '1200' ?>' onkeyup="reCalcValues()"/><br/>
             </fieldset>
+            <label class="draft" title="Если отмечено, заказ можно сохранить не заполняя поля Улица, Дом, Индекс, Имя, Фамилия, Телефон"><input type="checkbox" name="order_user_status_id" value="-2"> Черновик</label>
           </div>
           <fieldset>
             <legend>Параметры заказа</legend>

@@ -219,7 +219,7 @@ class MultiShip_OpenApi extends MultiShip_Object
 
       return false;
     }
-    if (!$recipient->validate())
+    if (!$recipient->validate($order))
     {
       $this->_error = $recipient->_last_error;
 
@@ -231,7 +231,7 @@ class MultiShip_OpenApi extends MultiShip_Object
 
       return false;
     }
-    if (!$delivery->pickuppoint && !$delivery_point->validate())
+    if (!$delivery->pickuppoint && !$delivery_point->validate($order))
     {
       $this->_error = $delivery_point->_last_error;
 

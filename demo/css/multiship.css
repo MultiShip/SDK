@@ -158,3 +158,6 @@ div.demo h3 {
 iframe.demo {
   border: 0;
 }
+label.draft {
+  float:left;
+}

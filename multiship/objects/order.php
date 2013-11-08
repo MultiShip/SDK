@@ -25,8 +25,14 @@
 class MultiShip_Order extends MultiShip_Object
 {
   var $_prefix = "order_";
-  var $_fields = array("num", "date", "weight", "width", "height", "length", "payment_method", "delivery_cost", "assessed_value", "comment", "items", "sender", "requisite", "warehouse");
+  var $_fields = array("num", "date", "weight", "width", "height", "length", "payment_method", "delivery_cost", "assessed_value", "comment", "items", "sender", "requisite", "warehouse", "user_status_id");
   var $_critical = array("date", "items", "assessed_value", "delivery_cost");
+
+  function __construct()
+  {
+    parent::__construct();
+    defined('ORDER_DRAFT_STATUS') or define('ORDER_DRAFT_STATUS', -2);
+  }
 
   // Добавляем вложение в заказ
   function appendItem(MultiShip_OrderItem $item)
