@@ -161,6 +161,8 @@ if (isset($_POST))
             <legend>Вложения</legend>
             <fieldset class='block goods'>
               <legend>Товарная позиция <a href="#" class="sub">-</a></legend>
+              ID
+              <input name='order_item_id[0]' value='<?php echo isset($_POST['order_item_id'][0]) ? $_POST['order_item_id'][0] : '' ?>'><br/>
               Арт
               <input name='order_item_article[0]' value='<?php echo isset($_POST['order_item_article'][0]) ? $_POST['order_item_article'][0] : 'abc' ?>'><br/>
               Наим.
