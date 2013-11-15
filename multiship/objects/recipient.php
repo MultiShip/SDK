@@ -28,4 +28,21 @@ class MultiShip_Recipient extends MultiShip_Object
     }
     return parent::fixField($name, $value);
   }
+
+  /**
+   * @param Multiship_Order|null $order
+   * @return bool
+   */
+  function validate($order = null)
+  {
+    if (isset($order->user_status_id) && $order->user_status_id == ORDER_DRAFT_STATUS)
+    {
+      $this->_critical = array();
+    }
+    else
+    {
+      $this->_critical = array("first_name", "last_name", "phone");
+    }
+    return parent::validate();
+  }
 }
