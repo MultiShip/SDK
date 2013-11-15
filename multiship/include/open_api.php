@@ -215,7 +215,14 @@ class MultiShip_OpenApi extends MultiShip_Object
     }
     if (!$order->validate())
     {
-      $this->_error = $order->_last_error;
+      if($order->_wrongItem)
+      {
+        $this->_error = $order->_wrongItem->_last_error;
+      }
+      else
+      {
+        $this->_error = $order->_last_error;
+      }
 
       return false;
     }
@@ -246,6 +253,70 @@ class MultiShip_OpenApi extends MultiShip_Object
 
     // Отправляем запрос и возвращаем результат запроса
     return $this->request('createOrder');
+  }
+  /**
+  Редактирование заказа
+  @PARAMS:
+  (MultiShip_Order) order - данные заказа
+  (MultiShip_Recipient) recipient - данные получателя
+  (MultiShip_Delivery) delivery - данные варианта доставки
+  (MultiShip_DeliveryPoint) delivery_point - данные точки доставки (адрес получателя или ПВЗ ID)
+
+  @RETURN bool|mixed|object
+   */
+  function editOrder($order, $recipient, $delivery, $delivery_point)
+  {
+    $this->_data = array();
+
+    // проверяем входные данные
+    if (!$order instanceof MultiShip_Order or !$recipient instanceof MultiShip_Recipient or !$delivery instanceof MultiShip_Delivery or !$delivery_point instanceof MultiShip_DeliveryPoint)
+    {
+      $this->_error = MULTISHIP_ERROR_WRONG_PARAM;
+
+      return false;
+    }
+
+    if (!$order->validate())
+    {
+      if($order->_wrongItem)
+      {
+        $this->_error = $order->_wrongItem->_last_error;
+      }
+      else
+      {
+        $this->_error = $order->_last_error;
+      }
+
+      return false;
+    }
+
+    if (!$recipient->validate())
+    {
+      $this->_error = $recipient->_last_error;
+
+      return false;
+    }
+    if (!$delivery->validate())
+    {
+      $this->_error = $delivery->_last_error;
+
+      return false;
+    }
+    if (!$delivery->pickuppoint && !$delivery_point->validate())
+    {
+      $this->_error = $delivery_point->_last_error;
+
+      return false;
+    }
+
+    // Инициализируем необходимые поля запроса
+    $order->appendToArray($this->_data, true);
+    $recipient->appendToArray($this->_data, true);
+    $delivery->appendToArray($this->_data, true);
+    $delivery_point->appendToArray($this->_data, true);
+
+    // Отправляем запрос и возвращаем результат запроса
+    return $this->request('editOrder');
   }
 
   /*
