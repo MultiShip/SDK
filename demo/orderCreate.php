@@ -90,7 +90,7 @@ if (isset($_POST))
   }
 
   // Собираем список вариантов доставки (см. deliverySearch.php для подробного описания)
-  $delivery_list_request = new MultiShip_RequestDeliveryList(@$_POST['sentfrom_city'], @$_POST['deliverypoint_city'], @$_POST['order_weight'], @$_POST['order_width'], @$_POST['order_height'], @$_POST['order_length'], '', @$_POST['deliverypoint_index']);
+  $delivery_list_request = new MultiShip_RequestDeliveryList(@$_POST['sentfrom_city'], @$_POST['deliverypoint_city'], @$_POST['order_weight'], @$_POST['order_width'], @$_POST['order_height'], @$_POST['order_length'], '', @$_POST['deliverypoint_index'], @$_POST['order_cost']);
   $delivery_list_request->delivery_type = "todoor";
   $to_door = $ms_api->searchDeliveryList($delivery_list_request, $delivery_point);
   $delivery_list_request->delivery_type = "pickup";
