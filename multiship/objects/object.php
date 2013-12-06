@@ -108,8 +108,9 @@ class MultiShip_Object
   @PARAMS
     (Pointer to Array of Mixed) ^arr - ссылка на массив параметров
     (Boolean) replace - указывает, требуется дописать параметры в исходный объект (true), или создать новый (false)
+    (Multiship_Order) order - экземпляр класса Multiship_Order, необходим для корректной валидации заказа-черновика
   */
-  function appendToArray(&$arr, $replace = false)
+  function appendToArray(&$arr, $replace = false, $order = null)
   {
     // Создаём рабочую копию исходного массива
     $arr_result = $arr;
@@ -118,7 +119,7 @@ class MultiShip_Object
     $this->fixFields();
 
     // Если объект не проходит валидацию, то присоединять к общему списку параметров его нельзя - ничего не делаем
-    if (!$this->validate())
+    if (!$this->validate($order))
     {
       return false;
     }
