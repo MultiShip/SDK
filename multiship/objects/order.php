@@ -19,13 +19,14 @@
     (Integer) sender ID отправителя
     (Integer) requisite ID реквизитов организации отправителя
     (Integer) warehouse ID склада отправителя
+    (Integer) user_status_id параметр для создания заказа со статусом "Черновик" (-2)
 */
 
 // Объект - Заказ
 class MultiShip_Order extends MultiShip_Object
 {
   var $_prefix = "order_";
-  var $_fields = array("num", "date", "weight", "width", "height", "length", "payment_method", "delivery_cost", "assessed_value", "comment", "items", "sender", "requisite", "warehouse", "user_status_id", "id");
+  var $_fields = array("num", "date", "weight", "width", "height", "length", "payment_method", "delivery_cost", "assessed_value", "comment", "items", "sender", "requisite", "warehouse", "user_status_id", "id", "total_cost");
   var $_critical = array("date", "items", "assessed_value", "delivery_cost", "weight", "width", "height", "length");
 
   var $_wrongItem;
