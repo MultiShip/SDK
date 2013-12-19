@@ -15,6 +15,6 @@
 */
 class MultiShip_RequestDeliveryList extends MultiShip_Object
 {
-  var $_fields = array("city_from", "city_to", "weight", "height", "width", "length", "create_date", "index_city", "total_cost");
+  var $_fields = array("city_from", "city_to", "weight", "height", "width", "length", "create_date", "index_city", "total_cost", "delivery_type");
   var $_critical = array("city_from", "city_to", "weight", "height", "width", "length");
 }
