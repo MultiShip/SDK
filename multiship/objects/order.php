@@ -17,7 +17,7 @@
     (String) comment Комментарии к заказу
     (Array Of MultiShip_OrderItem) items опись товарных позиций в заказе
     (Integer) sender ID отправителя
-    (Integer) requisite ID реквизитов организации итправителя
+    (Integer) requisite ID реквизитов организации отправителя
     (Integer) warehouse ID склада отправителя
 */
 
