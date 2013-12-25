@@ -13,7 +13,7 @@ class Multiship
   {
     if ($config == null)
     {
-      require_once "config/config.php";
+      require "config/config.php";
     }
     if (!isset($config) || !isset($config->client_id) || ($config->client_id == ''))
     {
