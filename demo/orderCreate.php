@@ -246,8 +246,8 @@ if (isset($_POST))
           <textarea name='recipient_comment'><?php echo isset($_POST['recipient_comment']) ? $_POST['recipient_comment'] : '' ?></textarea>
         </fieldset>
         <input type='submit' class='middle submit' name='searchDeliveries' value='Искать варианты доставки' style='float: right; margin-top: 20px;'>
-        <input type='submit' class='middle submit' name='createOrder' value='Создать'<?php echo $_POST ? '' : ' disabled="disabled"' ?> style='float: right; margin-top: 20px;'>
-        <br/><input type='submit' class='middle submit' name='editOrder' value='Редактировать'<?php echo $_POST ? '' : ' disabled="disabled"' ?> style='float: right; margin-top: 20px;'>
+        <input type='submit' class='middle submit' name='createOrder' value='Создать' style='float: right; margin-top: 20px;'>
+        <br/><input type='submit' class='middle submit' name='editOrder' value='Редактировать' style='float: right; margin-top: 20px;'>
       </th>
     </tr>
   </table>

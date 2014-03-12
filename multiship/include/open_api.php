@@ -232,7 +232,7 @@ class MultiShip_OpenApi extends MultiShip_Object
 
       return false;
     }
-    if (!$delivery->validate())
+    if (!$delivery->validate($order))
     {
       $this->_error = $delivery->_last_error;
 
